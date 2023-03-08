@@ -1,9 +1,12 @@
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 public class Kyu8 {
     public static void main(String[] args) {
 
         System.out.println(shortcut("hello"));// 1
         System.out.println(quarterOf(51));// 2
-        System.out.println((4+2)/3);
+        System.out.println(repeatStr1(2,"dssd"));//3
     }
 
 
@@ -34,6 +37,39 @@ public class Kyu8 {
         }
 
         return month;
+    }
+
+
+//3. Write a function that accepts an integer n and a string s as parameters, and returns a string of s repeated exactly n times.
+    public static String repeatStr1(final int repeat, final String string) {
+        StringBuilder s = new StringBuilder();
+        for (int i= 0 ; i<repeat; i++){
+            s.append(string);
+        }
+        return s.toString();
+    }
+    public static String repeatStr2(final int repeat, final String string) {
+        return string.repeat(repeat);
+    }
+
+    /*4 . Wolves have been reintroduced to Great Britain. You are a sheep farmer, and are now plagued by wolves which pretend to be sheep. Fortunately, you are good at spotting them.
+
+Warn the sheep in front of the wolf that it is about to be eaten. Remember that you are standing at the front of the queue which is at the end of the array:
+
+[sheep, sheep, sheep, sheep, sheep, wolf, sheep, sheep]      (YOU ARE HERE AT THE FRONT OF THE QUEUE)
+   7      6      5      4      3            2      1
+If the wolf is the closest animal to you, return "Pls go away and stop eating my sheep". Otherwise, return "Oi! Sheep number N! You are about to be eaten by a wolf!" where N is the sheep's position in the queue.
+     */
+    public static String warnTheSheep(String[] array) {
+        String [] ar = new String[] {"sheep", "wolf", "sheep", "sheep", "sheep", "sheep", "sheep"};
+
+        if ("wolf".contains(array[array.length-1])){
+            System.out.println("\"Pls go away and stop eating my sheep\"");
+        }else{
+            System.out.println("Oi! Sheep number N! You are about to be eaten by a wolf!");
+        }
+
+        return "";
     }
 
 }
