@@ -1,12 +1,24 @@
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Kyu8 {
     public static void main(String[] args) {
 
         System.out.println(shortcut("hello"));// 1
         System.out.println(quarterOf(51));// 2
-        System.out.println(repeatStr1(2,"dssd"));//3
+        System.out.println(repeatStr1(5, "dssd"));//3
+        System.out.println(countSheeps2(new Boolean[]
+                {true, true, true, false,
+                        true, true, true, true,
+                        true, false, true, false,
+                        true, false, false, true,
+                        true, true, true, true,
+                        false, false, true, true}));//4
+        System.out.println(strCount1("Hello", 'l'));//5
+//        System.out.println(encode("din"));
+
     }
 
 
@@ -32,7 +44,7 @@ public class Kyu8 {
             return 3;
         } else if (month == 10 | month == 11 | month == 12) {
             return 4;
-        }else {
+        } else {
             System.out.println("Given a month as an integer from 1 to 12");
         }
 
@@ -40,36 +52,55 @@ public class Kyu8 {
     }
 
 
-//3. Write a function that accepts an integer n and a string s as parameters, and returns a string of s repeated exactly n times.
+    //3. Write a function that accepts an integer n and a string s as parameters, and returns a string of s repeated exactly n times.
     public static String repeatStr1(final int repeat, final String string) {
         StringBuilder s = new StringBuilder();
-        for (int i= 0 ; i<repeat; i++){
+        for (int i = 0; i < repeat; i++) {
             s.append(string);
         }
         return s.toString();
     }
+
     public static String repeatStr2(final int repeat, final String string) {
         return string.repeat(repeat);
     }
 
-    /*4 . Wolves have been reintroduced to Great Britain. You are a sheep farmer, and are now plagued by wolves which pretend to be sheep. Fortunately, you are good at spotting them.
+    // 4.Consider an array/list of sheep where some sheep may be missing from their place. We need a function that counts the number of sheep present in the array (true means present).
 
-Warn the sheep in front of the wolf that it is about to be eaten. Remember that you are standing at the front of the queue which is at the end of the array:
-
-[sheep, sheep, sheep, sheep, sheep, wolf, sheep, sheep]      (YOU ARE HERE AT THE FRONT OF THE QUEUE)
-   7      6      5      4      3            2      1
-If the wolf is the closest animal to you, return "Pls go away and stop eating my sheep". Otherwise, return "Oi! Sheep number N! You are about to be eaten by a wolf!" where N is the sheep's position in the queue.
-     */
-    public static String warnTheSheep(String[] array) {
-        String [] ar = new String[] {"sheep", "wolf", "sheep", "sheep", "sheep", "sheep", "sheep"};
-
-        if ("wolf".contains(array[array.length-1])){
-            System.out.println("\"Pls go away and stop eating my sheep\"");
-        }else{
-            System.out.println("Oi! Sheep number N! You are about to be eaten by a wolf!");
-        }
-
-        return "";
+    public static int countSheeps1(Boolean[] arrayOfSheeps) {
+        return Arrays.stream(arrayOfSheeps).filter(x -> x).filter(x -> x != null).toArray().length;
     }
+
+    // ---------
+    public static int countSheeps2(Boolean[] arrayOfSheeps) {
+        int count = 0;
+        for (int i = 0; i < arrayOfSheeps.length; i++) {
+            if (arrayOfSheeps[i] != null && arrayOfSheeps[i]) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    // 5. Create a function that accepts a string and a single character, and returns an integer of the count of occurrences the 2nd argument is found in the first one.
+    //If no occurrences can be found, a count of 0 should be returned.
+    public static int strCount1(String str, char letter) {
+        char[] s = str.toCharArray();
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == letter) {
+                count++;
+            }
+
+        }
+        return count;
+    }
+
+    //------
+    public static int strCount2(String str, char letter) {
+        return (int) str.chars().filter(x -> x == letter).count();
+    }
+
+
 
 }
